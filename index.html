@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./CSS/style.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-white font-sans text-gray-800">
+
+  <!-- NAVIGATION BAR -->
+  <header class="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="text-xl font-bold">My Portfolio</div>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="hover:text-orange-600 font-medium">About Me</a>
+          <a href="personal.html" class="hover:text-orange-600 font-medium">Personal Project</a>
+          <a href="freelance.html" class="hover:text-orange-600 font-medium">Freelance Project</a>
+          <a href="mapping.html" class="hover:text-orange-600 font-medium">Indoor Mapping</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+          <button id="menu-btn" class="text-gray-700 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="index.html" class="block text-gray-700 hover:text-orange-600">About Me</a>
+      <a href="personal.html" class="block text-gray-700 hover:text-orange-600">Personal Project</a>
+      <a href="freelance.html" class="block text-gray-700 hover:text-orange-600">Freelance Project</a>
+      <a href="mapping.html" class="block text-gray-700 hover:text-orange-600">Indoor Mapping</a>
+    </div>
+  </header>
+
+  <!-- JS Toggle for Mobile Menu -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+<!-- Hero Section với 2 layer: nền + chữ -->
+<section class="hero-section">
+  <img src="./Image/Bg-orange.jpg" alt="Background" class="bg-image" />
+  <img src="./Image/Portfolio-text.png" alt="Portfolio" class="title-image" />
+</section>
+
+  <!-- Section 2 (Image 2) - no padding/margin -->
+  <section id="section2" class="w-full m-0 p-0 leading-none">
+    <img src="./Image/CV.jpg" alt="About Me Details"
+         class="w-full h-auto block" />
+  </section>
+
+</body>
+</html>
