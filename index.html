@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Me</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./CSS/style.css" />
   <style>
     html {
       scroll-behavior: smooth;
@@ -59,10 +58,14 @@
     });
   </script>
 
-<!-- Hero Section với 2 layer: nền + chữ -->
-<section class="hero-section">
-  <img src="./Image/Bg-orange.jpg" alt="Background" class="bg-image" />
-  <img src="./Image/Portfolio-text.png" alt="Portfolio" class="title-image" />
+<section class="relative w-full h-screen overflow-hidden">
+  <!-- Ảnh nền -->
+  <img src="./Image/Bg-orange.jpg" alt="Background"
+       class="absolute top-0 left-0 w-full h-full object-cover z-0" />
+
+  <!-- Ảnh chữ căn giữa -->
+  <img src="./Image/Portfolio-text.png" alt="Portfolio"
+       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-[600px] z-10" />
 </section>
 
   <!-- Section 2 (Image 2) - no padding/margin -->
