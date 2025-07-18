@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="icon" href="./Image/favicon2.webp" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    #openSidebar {
+      transition: opacity 0.3s ease;
+    }
+
+    #openSidebar {
+  pointer-events: auto;
+  position: relative;
+  z-index: 9999;
+}
+
+/* Ẩn scrollbar trên tất cả trình duyệt & thiết bị */
+
+/* Chrome, Safari, Edge (desktop + mobile) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html, body {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE 10+ */
+}
+
+/* iOS Safari scroll container (trường hợp hiếm) */
+body {
+  -webkit-overflow-scrolling: touch;
+  overflow: -moz-scrollbars-none;
+}
+
+@keyframes scroll-loop {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-loop {
+  animation: scroll-loop 20s linear infinite;
+  will-change: transform;
+}
+
+.hover-glow {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.hover-glow:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px #ffffffcc); /* Glow trắng */
+}
+  </style>
+</head>
+<body class="flex flex-col md:flex-row">
+
+<!-- SIDEBAR -->
+<aside id="sidebar"
+  class="bg-[#111] text-white w-48 p-6 fixed top-0 left-0 z-50 h-full md:h-screen md:sticky md:flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out hidden">
+  <div class="text-2xl font-bold mb-10 flex justify-between items-center whitespace-nowrap">
+    My Portfolio
+    <button id="closeSidebar" class="md:hidden text-2xl">&times;</button>
+  </div>
+  <nav class="space-y-4 font-semibold">
+    <a href="index.html" class="block hover:text-gray-500 whitespace-nowrap">About Me</a>
+    <a href="personal.html" class="block hover:text-gray-500 whitespace-nowrap">Personal Project</a>
+    <a href="freelance.html" class="block hover:text-gray-500 whitespace-nowrap">Freelance Project</a>
+    <a href="mapping.html" class="block hover:text-gray-500 whitespace-nowrap">Indoor Mapping</a>
+  </nav>
+</aside>
+
+<!-- MOBILE HAMBURGER (Sửa lại dùng fixed + z-index cao) -->
+<div class="md:hidden fixed top-0 left-0 w-full bg-[#111] z-[9999] px-4 py-3">
+  <button id="openSidebar" class="text-white text-3xl z-[9999] relative">
+    <img src="./Image/menu-icon.webp" alt="Menu" class="w-8 h-8 object-contain">
+  </button>
+</div>
+
+<!-- BACKDROP -->
+<div id="backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 md:hidden" onclick="closeMobileSidebar()"></div>
+
+<!-- MAIN CONTENT -->
+<main class="flex-1 md:ml-0 px-0 py-0 space-y-0 -translate-y-3">
+<!-- GỘP ẢNH VÀ SCROLL BAR -->
+<section class="relative w-full bg-[#111] px-0 md:px-6 lg:px-8 pt-20 flex flex-col items-center border-t border-[#333]">
+  <!-- PHẦN ẢNH -->
+  <div class="w-full max-w-[360px] sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1300px] mx-auto -translate-x-[14px] -translate-y-[5px]">
+    <img src="./Image/portfolio-group.webp" alt="Portfolio Group Image" class="w-full object-contain" />
+  </div>
+
+<!-- TEXT GIỮA ẢNH VÀ SCROLL ICON 
+<h2 class="text-white text-center text-xl md:text-3xl font-semibold tracking-wide">
+  TOOLS I WORK WITH
+</h2> -->
+
+  <!-- PHẦN SCROLL ICON -->
+<div class="scroll-wrapper w-full overflow-hidden pt-4 pb-3 flex items-center">
+  <div class="scroll-track flex gap-10 animate-scroll-loop">
+
+      <!-- Lặp icon 3 lần để tạo hiệu ứng vô hạn -->
+      <div class="flex gap-10 shrink-0">
+        <img src="./Image/icon-ps.webp" alt="Photoshop" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-ai.webp" alt="Illustrator" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-ae.webp" alt="After Effects" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-lr.webp" alt="Lightroom" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-pr.webp" alt="Premiere Pro" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-capcut.webp" alt="Capcut" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-obs.webp" alt="OBS" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-vmix.webp" alt="vMix" class="h-12 md:h-16 hover-glow" />
+      </div>
+      <div class="flex gap-10 shrink-0">
+        <img src="./Image/icon-ps.webp" alt="Photoshop" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-ai.webp" alt="Illustrator" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-ae.webp" alt="After Effects" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-lr.webp" alt="Lightroom" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-pr.webp" alt="Premiere Pro" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-capcut.webp" alt="Capcut" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-obs.webp" alt="OBS" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-vmix.webp" alt="vMix" class="h-12 md:h-16 hover-glow" />
+      </div>
+      <div class="flex gap-10 shrink-0">
+        <img src="./Image/icon-ps.webp" alt="Photoshop" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-ai.webp" alt="Illustrator" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-ae.webp" alt="After Effects" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-lr.webp" alt="Lightroom" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-pr.webp" alt="Premiere Pro" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-capcut.webp" alt="Capcut" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-obs.webp" alt="OBS" class="h-12 md:h-16 hover-glow" />
+        <img src="./Image/icon-vmix.webp" alt="vMix" class="h-12 md:h-16 hover-glow" />
+      </div>
+    </div>
+  </div>
+
+<!-- ẢNH + CONTENT BÊN DƯỚI SCROLL BAR -->
+<div class="w-full px-6 md:px-8 lg:px-8 pt-6">
+  <div class="flex flex-col items-center gap-6 max-w-[1200px] mx-auto">
+
+    <!-- AVA + TEXT -->
+    <div class="flex flex-col items-center text-white text-center gap-7">
+
+      <!-- AVA IMAGE -->
+<img
+  src="./Image/Ava 2.webp"
+  alt="Ava"
+  class="w-[1000px] h-auto object-contain mx-auto"
+  data-aos="fade-up"
+  data-aos-duration="800"
+/>
+      <!-- TITLE -->
+      <h3 
+      data-aos="fade-up"
+      data-aos-delay="100"
+      data-aos-duration="800"
+      class="text-4xl font-bold mb-0">
+      Hi, I'm Jacky</h3>
+      
+    </div>
+
+<!-- PARAGRAPH -->
+<div class="w-full text-white text-justify pb-20" 
+data-aos="fade-up" 
+data-aos-delay="200" 
+data-aos-duration="800">
+  <p class="text-base leading-relaxed mt-0">
+    My background is in Chinese language studies, but I have a strong passion for media, design, and video editing, which has led me to self-learn and develop skills in these areas. I am proactive, hardworking, and always eager to learn through hands-on experience. Although my background differs from many in the creative field, I believe that with a spirit of life-long learning, continuous curiosity, and a growth mindset, I can still add value along the way.
+  </p>
+</div>
+
+  </div>
+</div>
+</section>
+</main>
+
+<!-- JS -->
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const openSidebarBtn = document.getElementById('openSidebar');
+  const closeSidebarBtn = document.getElementById('closeSidebar');
+  const backdrop = document.getElementById('backdrop');
+
+  // Mobile sidebar open
+openSidebarBtn.addEventListener('click', () => {
+  sidebar.classList.remove('hidden');
+  requestAnimationFrame(() => {
+    sidebar.classList.remove('-translate-x-full');
+  });
+  backdrop.classList.remove('hidden');
+  openSidebarBtn.classList.add('hidden');
+});
+
+  // Mobile sidebar close
+  function closeMobileSidebar() {
+    sidebar.classList.add('-translate-x-full');
+    backdrop.classList.add('hidden');
+    openSidebarBtn.classList.remove('hidden');
+    setTimeout(() => sidebar.classList.add('hidden'), 300);
+  }
+
+  closeSidebarBtn.addEventListener('click', closeMobileSidebar);
+
+  // Khi resize lên desktop thì reset
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      sidebar.classList.remove('hidden', '-translate-x-full');
+      openSidebarBtn.classList.add('hidden');
+    } else {
+      sidebar.classList.add('hidden', '-translate-x-full');
+      openSidebarBtn.classList.remove('hidden');
+    }
+  });
+  
+  // Đóng sidebar nếu người dùng scroll khi đang mở (chỉ trên mobile)
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarVisible = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+
+  if (isMobile && isSidebarVisible) {
+    const currentScroll = window.scrollY;
+
+    // Nếu người dùng scroll xuống dưới ít nhất 20px
+    if (Math.abs(currentScroll - lastScroll) > 20) {
+      closeMobileSidebar();
+    }
+
+    lastScroll = currentScroll;
+  }
+});
+
+window.addEventListener('scroll', () => {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarVisible = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+
+  if (isMobile && isSidebarVisible) {
+    closeMobileSidebar();
+  }
+});
+
+// Đóng sidebar nếu chạm/nhấp ra ngoài sidebar trên mobile
+document.addEventListener('click', function (e) {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarOpen = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+  
+  if (isMobile && isSidebarOpen && !sidebar.contains(e.target) && !openSidebarBtn.contains(e.target)) {
+    closeMobileSidebar();
+  }
+});
+
+document.addEventListener('touchstart', function (e) {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarOpen = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+  
+  if (isMobile && isSidebarOpen && !sidebar.contains(e.target) && !openSidebarBtn.contains(e.target)) {
+    closeMobileSidebar();
+  }
+});
+
+<!-- Cuộn về đầu trang khi reload -->
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+</script>
+
+<!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+</body>
+</html>
+

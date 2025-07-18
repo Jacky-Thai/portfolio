@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="./Image/favicon2.webp" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freelance Projects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: white;
+    font-family: sans-serif;
+  }
+  .card {
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+  }
+  .card img {
+    transition: filter 0.3s ease;
+  }
+  .card:hover img {
+    filter: grayscale(100%);
+  }
+  #openSidebar {
+    transition: opacity 0.3s ease;
+  }
+  
+  #openSidebar {
+  pointer-events: auto;
+  position: relative;
+  z-index: 9999;
+}
+
+#lightbox.active {
+  display: flex;
+}
+
+
+.gallery-modal::-webkit-scrollbar {
+    display: none;
+  }
+  .gallery-modal {
+    -ms-overflow-style: none;  /* IE & Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+
+  .modal-close-button {
+    touch-action: manipulation;
+    cursor: pointer;
+  }
+  
+  .transition-none {
+  transition: none !important;
+}
+
+.full-screen-fixed {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+
+</head>
+<body class="flex flex-col md:flex-row">
+
+<!-- SIDEBAR -->
+<aside id="sidebar"
+  class="bg-[#111] text-white w-48 p-6 fixed top-0 left-0 z-50 h-full md:h-screen md:sticky md:flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out hidden">
+  <div class="text-2xl font-bold mb-10 flex justify-between items-center">
+    My Portfolio
+    <button id="closeSidebar" class="md:hidden text-2xl">&times;</button>
+  </div>
+  <nav class="space-y-4 font-semibold">
+    <a href="index.html" class="block hover:text-gray-500">About Me</a>
+    <a href="personal.html" class="block hover:text-gray-500">Personal Project</a>
+    <a href="freelance.html" class="block hover:text-gray-500">Freelance Project</a>
+    <a href="mapping.html" class="block hover:text-gray-500">Indoor Mapping</a>
+  </nav>
+</aside>
+
+<!-- MOBILE HAMBURGER (Sửa lại dùng fixed + z-index cao) -->
+<div id="hamburgerBar" class="md:hidden fixed top-0 left-0 w-full bg-[#111] z-[9999] px-4 py-3">
+  <button id="openSidebar" class="text-white text-3xl z-[9999] relative">
+    <img src="./Image/menu-icon.webp" alt="Menu" class="w-8 h-8 object-contain">
+  </button>
+</div>
+
+<!-- BACKDROP -->
+<div id="backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 md:hidden" onclick="closeMobileSidebar()"></div>
+
+<!-- MAIN CONTENT -->
+<main class="flex-1 md:ml-10 px-4 py-10 pt-[60px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+
+  <!-- VIDEO CARD TEMPLATE -->
+  <div class="card relative">
+    <div class="relative pt-[49.95%]">
+      <iframe id="vimeo1" src="https://player.vimeo.com/video/1087056986?h=82fd2515e2&title=0&byline=0&portrait=0"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+        class="absolute top-0 left-0 w-full h-full rounded-xl"></iframe>
+
+      <div id="overlay1"
+        class="absolute inset-0 bg-black bg-opacity-100 hidden flex flex-col justify-center items-center text-white text-center">
+        <button onclick="replayVideo('vimeo1', 'overlay1')"
+          class="px-6 py-2 text-white rounded-md transition font-semibold">↺</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card relative">
+    <div class="relative pt-[49.95%]">
+      <iframe id="vimeo2" src="https://player.vimeo.com/video/1087056868?h=f6c2a0ee5b&title=0&byline=0&portrait=0"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+        class="absolute top-0 left-0 w-full h-full rounded-xl"></iframe>
+
+      <div id="overlay2"
+        class="absolute inset-0 bg-black bg-opacity-100 hidden flex flex-col justify-center items-center text-white text-center">
+        <button onclick="replayVideo('vimeo2', 'overlay2')"
+          class="px-6 py-2 text-white rounded-md transition font-semibold">↺</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card relative">
+    <div class="relative pt-[56.25%]">
+      <iframe id="vimeo3" src="https://player.vimeo.com/video/1087056827?h=95e44bdd9c&title=0&byline=0&portrait=0"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+        class="absolute top-0 left-0 w-full h-full rounded-xl"></iframe>
+
+      <div id="overlay3"
+        class="absolute inset-0 bg-black bg-opacity-100 hidden flex flex-col justify-center items-center text-white text-center">
+        <button onclick="replayVideo('vimeo3', 'overlay3')"
+          class="px-6 py-2 text-white rounded-md transition font-semibold">↺</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card relative">
+    <div class="relative pt-[56.25%]">
+      <iframe id="vimeo4" src="https://player.vimeo.com/video/1087057007?h=73988e9c75&title=0&byline=0&portrait=0"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+        class="absolute top-0 left-0 w-full h-full rounded-xl"></iframe>
+
+      <div id="overlay4"
+        class="absolute inset-0 bg-black bg-opacity-100 hidden flex flex-col justify-center items-center text-white text-center">
+        <button onclick="replayVideo('vimeo4', 'overlay4')"
+          class="px-6 py-2 text-white rounded-md transition font-semibold">↺</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card relative">
+    <div class="relative pt-[56.25%]">
+      <iframe id="vimeo5" src="https://player.vimeo.com/video/1087158330?h=931c51ad61&title=0&byline=0&portrait=0"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+        class="absolute top-0 left-0 w-full h-full rounded-xl"></iframe>
+
+      <div id="overlay5"
+        class="absolute inset-0 bg-black bg-opacity-100 hidden flex flex-col justify-center items-center text-white text-center">
+        <button onclick="replayVideo('vimeo5', 'overlay5')"
+          class="px-6 py-2 text-white rounded-md transition font-semibold">↺</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card relative">
+    <div class="relative pt-[56.25%]">
+      <iframe id="vimeo6" src="https://player.vimeo.com/video/1087062616?h=59c394aba7&title=0&byline=0&portrait=0"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+        class="absolute top-0 left-0 w-full h-full rounded-xl"></iframe>
+
+      <div id="overlay6"
+        class="absolute inset-0 bg-black bg-opacity-100 hidden flex flex-col justify-center items-center text-white text-center">
+        <button onclick="replayVideo('vimeo6', 'overlay6')"
+          class="px-6 py-2 text-white rounded-md transition font-semibold">↺</button>
+      </div>
+    </div>
+  </div>
+
+
+<!-- CARD -->
+<div class="card relative group" onclick="openGalleryModal('modal-weeding')">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-weeding">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Hình ảnh hiển thị sau khi load -->
+  <img src="./Image/Weeding.webp"
+      alt="Project Weeding"
+      class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+      onload="handleImageLoaded(this, 'spinner-weeding')" 
+      data-spinner="spinner-weeding"/>
+</div>
+
+<!-- MODAL -->
+<div id="modal-weeding"
+  class="gallery-modal fixed inset-0 bg-black bg-opacity-90 hidden z-50 overflow-y-auto"
+  onclick="handleModalBackdropClick(event, 'modal-weeding')">
+
+  <!-- Nút Close -->
+  <button onclick="closeGalleryModal('modal-weeding')"
+          class="absolute top-4 left-4 z-50 text-white text-3xl font-bold hover:text-gray-500 rounded-full px-3 py-1">
+    &times;
+  </button>
+
+  <!-- Wrapper -->
+  <div class="min-h-screen w-full flex justify-center items-start px-4 pt-20 pb-20"
+       onclick="event.stopPropagation();">
+    <div class="modal-content max-w-5xl w-full flex flex-col gap-6 items-center">
+      
+      <!-- Ảnh 1 -->
+      <div class="relative w-full max-w-4xl">
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10" id="spinner-weeding-1">
+          <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+            <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+          </div>
+        </div>
+        <img src="./Image/Weeding1.webp"
+             class="w-full rounded-xl opacity-0 transition-opacity duration-300"
+             onload="handleImageLoaded(this, 'spinner-weeding-1')"
+             data-spinner="spinner-weeding-1" />
+      </div>
+
+      <!-- Ảnh 2 -->
+      <div class="relative w-full max-w-4xl">
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10" id="spinner-weeding-2">
+          <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+            <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+          </div>
+        </div>
+        <img src="./Image/Weeding 2.webp"
+             class="w-full rounded-xl opacity-0 transition-opacity duration-300"
+             onload="handleImageLoaded(this, 'spinner-weeding-2')"
+             data-spinner="spinner-weeding-2" />
+      </div>
+
+      <!-- Ảnh 3 -->
+      <div class="relative w-full max-w-4xl">
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10" id="spinner-weeding-3">
+          <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+            <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+          </div>
+        </div>
+        <img src="./Image/Weeding3.webp"
+             class="w-full rounded-xl opacity-0 transition-opacity duration-300"
+             onload="handleImageLoaded(this, 'spinner-weeding-3')"
+             data-spinner="spinner-weeding-3" />
+      </div>
+
+      <!-- Ảnh 4 -->
+      <div class="relative w-full max-w-4xl">
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10" id="spinner-weeding-4">
+          <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+            <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+          </div>
+        </div>
+        <img src="./Image/Weeding.webp"
+             class="w-full rounded-xl opacity-0 transition-opacity duration-300"
+             onload="handleImageLoaded(this, 'spinner-weeding-4')"
+             data-spinner="spinner-weeding-4" />
+      </div>
+      <div class="h-2"></div>  <!-- Padding giả để đẩy ảnh lên -->
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Image Cards with Lightbox -->
+<!-- CARD 1: spe-party.webp -->
+<div class="card relative group">
+  <!-- Spinner -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-spe-party">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image -->
+  <img src="./Image/spe-party(Card).webp"
+      alt="Freelance Project 1"
+      class="w-full h-auto opacity-0 transition-opacity duration-300"
+      onload="handleImageLoaded(this, 'spinner-spe-party')"
+      onclick="openLightbox('./Image/spe-party.webp')" 
+      data-spinner="spinner-spe-party"/>
+</div>
+
+<!-- CARD 2: Artboard HPM -->
+<div class="card relative group">
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-hpm">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <img src="./Image/Artboard HPM.webp"
+      alt="Freelance Project 2"
+      class="w-full h-auto opacity-0 transition-opacity duration-300"
+      onload="handleImageLoaded(this, 'spinner-hpm')"
+      onclick="openLightbox('./Image/HPM.webp')" 
+      data-spinner="spinner-hpm"/>
+</div>
+
+<!-- CARD 3: Artboard BTC -->
+<div class="card relative group">
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-btc">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <img src="./Image/Artboard BTC.webp"
+      alt="Freelance Project 3"
+      class="w-full h-auto opacity-0 transition-opacity duration-300"
+      onload="handleImageLoaded(this, 'spinner-btc')"
+      onclick="openLightbox('./Image/BTC.webp')"
+      data-spinner="spinner-btc" />
+</div>
+
+<!-- CARD mở modal scroll dọc -->
+<div class="card relative group" onclick="openGalleryModal('modal-artboard-gb')">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-artboard-gb">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Hình ảnh chính (preview) -->
+  <img src="./Image/Artboard GB.webp"
+      alt="Freelance Project 4"
+      class="w-full h-auto opacity-0 transition-opacity duration-300"
+      onload="handleImageLoaded(this, 'spinner-artboard-gb')" 
+      data-spinner="spinner-artboard-gb"/>
+</div>
+
+<!-- MODAL CAROUSEL -->
+<div id="modal-artboard-gb"
+     class="gallery-modal full-screen-fixed bg-black bg-opacity-95 z-50 hidden overflow-hidden flex"
+     onclick="handleModalBackdropClick(event, 'modal-artboard-gb')">
+
+  <!-- Nút Close -->
+  <button onclick="closeGalleryModal('modal-artboard-gb')"
+          class="absolute top-6 left-6 text-white text-3xl font-bold hover:text-gray-500 z-50">
+    &times;
+  </button>
+
+<!-- Button trái (desktop) -->
+<button onclick="prevSlide()"
+        class="hidden md:block absolute top-1/2 left-12 -translate-y-1/2 text-white text-4xl z-50 transition duration-200 hover:text-gray-400">
+  &#10094;
+</button>
+
+<!-- Button phải (desktop) -->
+<button onclick="nextSlide()"
+        class="hidden md:block absolute top-1/2 right-12 -translate-y-1/2 text-white text-4xl z-50 transition duration-200 hover:text-gray-400">
+  &#10095;
+</button>
+
+<!-- Button trên (mobile) -->
+<button onclick="prevSlide()"
+        class="md:hidden absolute top-12 left-1/2 -translate-x-1/2 text-white text-3xl z-50 rotate-[90deg]">
+  &#10094;
+</button>
+
+<!-- Button dưới (mobile) -->
+<button onclick="nextSlide()"
+        class="md:hidden absolute bottom-12 left-1/2 -translate-x-1/2 text-white text-3xl z-50 rotate-[90deg]">
+  &#10095;
+</button>
+
+ <!-- Carousel container -->
+  <div class="w-full h-full flex justify-center items-center overflow-hidden">
+    <div id="carousel-track"
+         class="flex flex-col md:flex-row w-full h-full transition-transform duration-500 ease-in-out"
+         style="transform: translateX(0%)">
+
+      <!-- Slide 1 -->
+      <div class="w-full h-full flex-shrink-0 flex items-center justify-center relative">
+        <!-- Spinner -->
+        <div id="spinner-artboard-1" class="absolute inset-0 flex items-center justify-center z-20 bg-black">
+          <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+            <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+          </div>
+        </div>
+        <img src="./Image/Poster GB.webp"
+             class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl opacity-0 transition-opacity duration-300"
+             onload="handleImageLoaded(this, 'spinner-artboard-1')"
+             data-spinner="spinner-artboard-1" />
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="w-full h-full flex-shrink-0 flex items-center justify-center relative">
+        <div id="spinner-artboard-2" class="absolute inset-0 flex items-center justify-center z-20 bg-black">
+          <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+            <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+          </div>
+        </div>
+        <img src="./Image/Thong bao GB.webp"
+             class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl opacity-0 transition-opacity duration-300"
+             onload="handleImageLoaded(this, 'spinner-artboard-2')"
+             data-spinner="spinner-artboard-2" />
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="w-full h-full flex-shrink-0 flex items-center justify-center relative">
+        <div id="spinner-artboard-3" class="absolute inset-0 flex items-center justify-center z-20 bg-black">
+          <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+            <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+          </div>
+        </div>
+        <img src="./Image/GB.webp"
+             class="max-w-[80vw] max-h-[90vh] object-contain rounded-xl opacity-0 transition-opacity duration-300"
+             onload="handleImageLoaded(this, 'spinner-artboard-3')"
+             data-spinner="spinner-artboard-3" />
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CARD: Artboard LHVN -->
+<div class="card relative group" onclick="openLightbox('./Image/LHVN.webp')">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-lhvn">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Ảnh chính -->
+  <img src="./Image/Artboard LHVN.webp"
+      alt="Freelance Project LHVN"
+      class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+      onload="handleImageLoaded(this, 'spinner-lhvn')" 
+      data-spinner="spinner-lhvn"/>
+</div>
+
+</main>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-95 hidden z-50 flex flex-col">
+  <!-- Close Button -->
+  <button onclick="closeLightbox()" class="absolute top-12 left-10 text-white text-3xl font-bold hover:text-gray-500 z-50">
+    &times;
+  </button>
+
+    <!-- Spinner -->
+  <div id="lightbox-spinner" class="absolute inset-0 flex items-center justify-center z-40 bg-black bg-opacity-80 hidden">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image Viewer -->
+  <div class="flex-1 flex items-center justify-center p-4">
+    <img id="lightbox-img" src="" alt="Preview" class="max-w-full max-h-[90vh] rounded-xl shadow-xl object-contain" />
+  </div>
+</div>
+
+<!-- JS -->
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const openSidebarBtn = document.getElementById('openSidebar');
+  const closeSidebarBtn = document.getElementById('closeSidebar');
+  const backdrop = document.getElementById('backdrop');
+
+  openSidebarBtn.addEventListener('click', () => {
+    sidebar.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      sidebar.classList.remove('-translate-x-full');
+    });
+    backdrop.classList.remove('hidden');
+    openSidebarBtn.classList.add('hidden');
+  });
+
+  function closeMobileSidebar() {
+    sidebar.classList.add('-translate-x-full');
+    backdrop.classList.add('hidden');
+    openSidebarBtn.classList.remove('hidden');
+    setTimeout(() => sidebar.classList.add('hidden'), 300);
+  }
+
+  closeSidebarBtn?.addEventListener('click', closeMobileSidebar);
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      sidebar.classList.remove('hidden', '-translate-x-full');
+      openSidebarBtn.classList.add('hidden');
+    } else {
+      sidebar.classList.add('hidden', '-translate-x-full');
+      openSidebarBtn.classList.remove('hidden');
+    }
+  });
+
+// Lightbox
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const spinner = document.getElementById('lightbox-spinner');
+
+  // Nếu ảnh đã load trước đó → không cần load lại
+  if (lbImg.getAttribute('data-loaded') === src) {
+    spinner.classList.add("hidden");
+    lbImg.classList.remove("opacity-0");
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const hamburger = document.getElementById('hamburgerBar');
+    if (hamburger) hamburger.classList.add('hidden');
+    return;
+  }
+
+  // Reset trạng thái cho ảnh mới
+  lbImg.classList.add("opacity-0");
+  spinner.classList.remove("hidden");
+
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  lbImg.onload = function () {
+    spinner.classList.add("hidden");
+    lbImg.classList.remove("opacity-0");
+
+    // Ghi lại ảnh đã load để tránh load lại lần sau
+    lbImg.setAttribute('data-loaded', src);
+  };
+
+  lbImg.src = src;
+
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.add('hidden');
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  const spinner = document.getElementById('lightbox-spinner');
+  const lbImg = document.getElementById('lightbox-img');
+
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+
+  // Giữ nguyên ảnh để tránh load lại
+  spinner.classList.add("hidden");
+  lbImg.classList.add("opacity-0");
+
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.remove('hidden');
+}
+
+
+  // Đóng sidebar nếu người dùng scroll khi đang mở (chỉ trên mobile)
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarVisible = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+
+  if (isMobile && isSidebarVisible) {
+    const currentScroll = window.scrollY;
+
+    // Nếu người dùng scroll xuống dưới ít nhất 20px
+    if (Math.abs(currentScroll - lastScroll) > 20) {
+      closeMobileSidebar();
+    }
+
+    lastScroll = currentScroll;
+  }
+});
+
+window.addEventListener('scroll', () => {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarVisible = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+
+  if (isMobile && isSidebarVisible) {
+    closeMobileSidebar();
+  }
+});
+
+// Đóng sidebar nếu chạm/nhấp ra ngoài sidebar trên mobile
+document.addEventListener('click', function (e) {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarOpen = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+  
+  if (isMobile && isSidebarOpen && !sidebar.contains(e.target) && !openSidebarBtn.contains(e.target)) {
+    closeMobileSidebar();
+  }
+});
+
+// Đóng sidebar trên mobile khi chạm ngoài
+document.addEventListener('touchstart', function (e) {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarOpen = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+  if (isMobile && isSidebarOpen && !sidebar.contains(e.target) && !openSidebarBtn.contains(e.target)) {
+    closeMobileSidebar();
+  }
+});
+
+// Mở modal gallery
+function openGalleryModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+
+  // Hiển thị modal (flex hoặc block tùy modal)
+  modal.classList.remove('hidden');
+  modal.classList.add('flex'); // Đảm bảo hiện modal dạng flex nếu cần
+  document.body.style.overflow = 'hidden'; // Ẩn scroll trang chính
+
+  // Reset scroll về đầu modal
+  modal.scrollTop = 0;
+
+  // Ẩn hamburger trên mobile
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.add('hidden');
+}
+
+// Đóng modal gallery
+function closeGalleryModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+
+  modal.classList.remove('flex');
+  modal.classList.add('hidden');
+  document.body.style.overflow = '';
+
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.remove('hidden');
+}
+
+// ESC để đóng tất cả modal gallery
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.gallery-modal').forEach(modal => {
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    });
+    document.body.style.overflow = '';
+
+    const hamburger = document.getElementById('hamburgerBar');
+    if (hamburger) hamburger.classList.remove('hidden');
+
+    // Đóng lightbox nếu đang mở
+    closeLightbox?.();
+  }
+});
+
+// Click ra vùng đen để đóng modal gallery
+function handleModalBackdropClick(e, modalId) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+  if (e.target === modal) {
+    closeGalleryModal(modalId);
+  }
+}
+
+let currentSlide = 0;
+const totalSlides = 3;
+const track = document.getElementById('carousel-track');
+
+function openGalleryModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+
+if (id === 'modal-artboard-gb') {
+  currentIndex = 0;
+  updateSlidePosition();
+}
+
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.add('hidden');
+}
+
+let currentIndex = 0;
+let isVertical = window.innerWidth < 768;
+
+function updateSlidePosition() {
+  const track = document.getElementById('carousel-track');
+  const slideCount = track.children.length;
+  const offset = isVertical ? `-${currentIndex * 100}vh` : `-${currentIndex * 100}%`;
+  track.style.transform = isVertical ? `translateY(${offset})` : `translateX(${offset})`;
+}
+
+// Theo dõi resize để cập nhật layout và vị trí
+window.addEventListener('resize', () => {
+  const newVertical = window.innerWidth < 768;
+  if (newVertical !== isVertical) {
+    isVertical = newVertical;
+
+    const track = document.getElementById('carousel-track');
+    track.classList.add('transition-none');
+
+    // Đợi layout flex-col/flex-row cập nhật xong
+    requestAnimationFrame(() => {
+      updateSlidePosition();
+      
+      // Bỏ transition-none ở frame tiếp theo nữa để tránh nháy
+      requestAnimationFrame(() => {
+        track.classList.remove('transition-none');
+      });
+    });
+  }
+});
+
+function nextSlide() {
+  const track = document.getElementById('carousel-track');
+  const slideCount = track.children.length;
+  currentIndex = (currentIndex + 1) % slideCount;
+  updateSlidePosition();
+}
+
+function prevSlide() {
+  const track = document.getElementById('carousel-track');
+  const slideCount = track.children.length;
+  currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+  updateSlidePosition();
+}
+
+let startY = 0;
+
+document.getElementById('carousel-track').addEventListener('touchstart', function(e) {
+  startY = e.touches[0].clientY;
+}, { passive: true });
+
+document.getElementById('carousel-track').addEventListener('touchend', function(e) {
+  const endY = e.changedTouches[0].clientY;
+  const deltaY = startY - endY;
+
+  if (Math.abs(deltaY) > 50) {
+    if (deltaY > 0) {
+      nextSlide(); // Vuốt lên -> next
+    } else {
+      prevSlide(); // Vuốt xuống -> prev
+    }
+  }
+}, { passive: true });
+
+function handleImageLoaded(img, spinnerId) {
+  img.classList.remove("opacity-0"); // Hiện ảnh
+  const spinner = document.getElementById(spinnerId);
+  if (spinner) {
+    spinner.style.display = "none"; // Ẩn spinner
+  }
+}
+
+<!-- Cuộn về đầu trang khi reload -->
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+window.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("img[data-spinner]").forEach((img) => {
+    if (img.complete) {
+      const spinnerId = img.getAttribute("data-spinner");
+      handleImageLoaded(img, spinnerId);
+    }
+  });
+});
+
+</script>
+
+<!-- Vimeo -->
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+  const videoIds = ['vimeo1', 'vimeo2', 'vimeo3', 'vimeo4', 'vimeo5', 'vimeo6'];
+
+  videoIds.forEach((id, index) => {
+    const iframe = document.getElementById(id);
+    const overlay = document.getElementById('overlay' + (index + 1));
+    const player = new Vimeo.Player(iframe);
+
+    player.on('ended', function () {
+      overlay.classList.remove('hidden');
+    });
+
+    player.on('play', function () {
+      overlay.classList.add('hidden');
+    });
+  });
+
+  function replayVideo(videoId, overlayId) {
+    const iframe = document.getElementById(videoId);
+    const overlay = document.getElementById(overlayId);
+    const player = new Vimeo.Player(iframe);
+
+    overlay.classList.add('hidden');
+    player.setCurrentTime(0).then(() => player.play());
+  }
+</script>
+
+</body>
+</html>

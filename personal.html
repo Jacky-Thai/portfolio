@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="./Image/favicon2.webp" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Projects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .card {
+      border-radius: 1rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .card img {
+      transition: filter 0.3s ease;
+    }
+
+    .card:hover img {
+      filter: grayscale(100%);
+    }
+
+    .lightbox, .gallery-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .lightbox.active,
+    .gallery-modal.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lightbox img, .gallery-modal img {
+      max-width: 100%;
+      border-radius: 1rem;
+    }
+
+    #openSidebar {
+  transition: opacity 0.3s ease;
+}
+
+.gallery-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.gallery-modal.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container ảnh */
+.gallery-modal .content-scroll {
+  max-height: 90vh;
+  max-width: 70vw;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+.gallery-modal .content-scroll::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.gallery-modal img {
+  max-width: 100%;
+  border-radius: 1rem;
+}
+
+#openSidebar {
+  pointer-events: auto;
+  position: relative;
+  z-index: 9999;
+}
+
+.gallery-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.95);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  overflow: auto;
+}
+
+.gallery-modal.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-modal .scroll-x {
+  overflow-x: auto;
+  -ms-overflow-style: none;  /* IE + Edge */
+  scrollbar-width: none;     /* Firefox */
+  user-select: none; /* Ngăn chọn chữ */
+}
+.gallery-modal .scroll-x::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari */
+}
+
+.scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
+.gallery-modal,
+.lightbox {
+  overscroll-behavior: contain;
+}
+
+  </style>
+</head>
+<body class="flex flex-col md:flex-row">
+
+<!-- SIDEBAR (Desktop + Mobile Slide) -->
+<aside id="sidebar"
+  class="bg-[#111] text-white w-48 p-6 fixed top-0 left-0 z-50 h-full md:h-screen md:sticky md:flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out hidden">
+  <div class="text-2xl font-bold mb-10 flex justify-between items-center">
+    My Portfolio
+    <button id="closeSidebar" class="md:hidden text-2xl">&times;</button>
+  </div>
+  <nav class="space-y-4 font-semibold">
+    <a href="index.html" class="block hover:text-gray-500">About Me</a>
+    <a href="personal.html" class="block hover:text-gray-500">Personal Project</a>
+    <a href="freelance.html" class="block hover:text-gray-500">Freelance Project</a>
+    <a href="mapping.html" class="block hover:text-gray-500">Indoor Mapping</a>
+  </nav>
+</aside>
+
+<!-- MOBILE HAMBURGER (Sửa lại dùng fixed + z-index cao) -->
+<div id="hamburgerBar" class="md:hidden fixed top-0 left-0 w-full bg-[#111] z-[9999] px-4 py-3">
+  <button id="openSidebar" class="text-white text-3xl z-[9999] relative">
+    <img src="./Image/menu-icon.webp" alt="Menu" class="w-8 h-8 object-contain">
+  </button>
+</div>
+
+<!-- BACKDROP (Mobile) -->
+<div id="backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 md:hidden" onclick="closeMobileSidebar()"></div>
+
+<!-- MAIN CONTENT -->
+<main class="flex-1 md:ml-10 px-4 py-10 pt-[60px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+
+  <!-- CARD IMAGE -->
+
+    <!-- CARD IMAGE 1 -->
+<div class="card relative group">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-8-3">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image 1 -->
+  <img src="./Image/8.3(Card).webp"
+      alt="Project 1"
+      class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+      onload="handleImageLoaded(this, 'spinner-8-3')"
+      onclick="openLightbox('./Image/8.3.webp')" 
+      data-spinner="spinner-8-3"/>
+</div>
+
+    <!-- CARD IMAGE 2 -->
+<div class="card relative group">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-uudai">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image 2 -->
+  <img src="./Image/uudai(Card).webp"
+       alt="Project 2"
+       class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+       onload="handleImageLoaded(this, 'spinner-uudai')"
+       onclick="openLightbox('./Image/uudai.webp')" 
+       data-spinner="spinner-uudai"/>
+</div>
+
+    <!-- CARD IMAGE 3 -->
+<div class="card relative group">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-mungdaile">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image 3 -->
+  <img src="./Image/mungdaile(Card).webp"
+       alt="Project 3"
+       class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+       onload="handleImageLoaded(this, 'spinner-mungdaile')"
+       onclick="openLightbox('./Image/mungdaile.webp')" 
+       data-spinner="spinner-mungdaile"/>
+</div>
+  
+    <!-- CARD IMAGE 4 -->
+<div class="card relative group">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-dauthangluongve">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image 4 -->
+  <img src="./Image/dauthangluongve(Card).webp"
+       alt="Project 4"
+       class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+       onload="handleImageLoaded(this, 'spinner-dauthangluongve')"
+       onclick="openLightbox('./Image/dauthangluongve.webp')" 
+       data-spinner="spinner-dauthangluongve"/>
+</div>
+
+<!-- CARD mở gallery dọc có loading -->
+<div class="card relative group" onclick="openGalleryModal('gallery-gaming')">
+  <!-- Spinner -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-gaming">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image -->
+  <img src="./Image/Gaming.webp"
+       alt="Project 5"
+       class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+       onload="handleImageLoaded(this, 'spinner-gaming')" 
+       data-spinner="spinner-gaming"/>
+</div>
+
+<!-- MODAL SCROLL DỌC -->
+<div id="gallery-gaming" class="gallery-modal hidden">
+  <button onclick="closeGalleryModal('gallery-gaming')" class="text-white text-3xl absolute top-6 left-8 font-bold hover:text-gray-400">
+    &times;
+  </button>
+
+  <div class="content-scroll mx-auto mt-6 grid gap-7">
+    <!-- Image 1 -->
+      <div class="relative group">
+        <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-gaming-1">
+          <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+            <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+          </div>
+        </div>
+        <img src="./Image/4.webp"
+            alt="Detail 1"
+            class="rounded-xl opacity-0 transition-opacity duration-300"
+            onload="handleImageLoaded(this, 'spinner-gaming-1')"
+            data-spinner="spinner-gaming-1" />
+      </div>
+
+    <!-- Image 2 -->
+    <div class="relative group">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-gaming-2">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/5.webp"
+          alt="Detail 2"
+          class="rounded-xl opacity-0 transition-opacity duration-300"
+          onload="handleImageLoaded(this, 'spinner-gaming-2')"
+          data-spinner="spinner-gaming-2" />
+    </div>
+
+    <!-- Image 3 -->
+    <div class="relative group">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-gaming-3">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/2.webp"
+          alt="Detail 3"
+          class="rounded-xl opacity-0 transition-opacity duration-300"
+          onload="handleImageLoaded(this, 'spinner-gaming-3')"
+          data-spinner="spinner-gaming-3" />
+    </div>
+
+    <!-- Image 4 -->
+    <div class="relative group">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-gaming-4">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/3.webp"
+          alt="Detail 4"
+          class="rounded-xl opacity-0 transition-opacity duration-300"
+          onload="handleImageLoaded(this, 'spinner-gaming-4')"
+          data-spinner="spinner-gaming-4" />
+    </div>
+
+    <!-- Image 5 -->
+    <div class="relative group">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-gaming-5">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/6.webp"
+          alt="Detail 5"
+          class="rounded-xl opacity-0 transition-opacity duration-300"
+          onload="handleImageLoaded(this, 'spinner-gaming-5')"
+          data-spinner="spinner-gaming-5" />
+    </div>
+
+    <!-- Image 6 -->
+    <div class="relative group">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-gaming-6">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/1.webp"
+          alt="Detail 6"
+          class="rounded-xl opacity-0 transition-opacity duration-300"
+          onload="handleImageLoaded(this, 'spinner-gaming-6')"
+          data-spinner="spinner-gaming-6" />
+    </div>
+</div>
+  </div>
+</div>
+
+<!-- VIDEO -->
+<div class="card relative">
+  <div class="relative" style="padding-top: 56.25%;">
+    <iframe id="personal-vimeo-player" src="https://player.vimeo.com/video/1100196278?autoplay=0&muted=1&playsinline=0"
+      class="absolute top-0 left-0 w-full h-full rounded-xl z-0"
+      frameborder="0"
+      allow="autoplay; fullscreen"
+      allowfullscreen></iframe>
+
+    <!-- Overlay khi video kết thúc -->
+    <div id="personal-vimeo-overlay"
+        class="absolute inset-0 bg-black bg-opacity-100 flex items-center justify-center hidden z-50">
+      <button onclick="replayVimeo()" 
+              class="text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-black-300">
+        ↺ 
+      </button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- MORE CARDS -->
+<div class="card relative group" onclick="openGalleryModal('gallery-cocoon')">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-cocoon">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image -->
+  <div class="w-full aspect-[16/9] overflow-hidden rounded-xl">
+    <img src="./Image/Cocoon.webp"
+        alt="Project 6"
+        class="w-full h-full object-cover object-center opacity-0 transition-opacity duration-300"
+        onload="handleImageLoaded(this, 'spinner-cocoon')" 
+        data-spinner="spinner-cocoon"/>
+  </div>
+</div>
+
+<!-- GALLERY MODAL SCROLL NGANG -->
+<div id="gallery-cocoon" class="gallery-modal hidden">
+  <!-- Close Button -->
+  <button onclick="closeGalleryModal('gallery-cocoon')"
+    class="absolute top-4 left-8 text-white text-3xl font-bold hover:text-gray-500 z-50 transition">
+    &times;
+  </button>
+
+  <!-- Horizontal Scroll Container -->
+  <div class="scroll-x flex gap-4 max-w-full p-8 items-center">
+
+    <!-- Image 1 -->
+    <div class="relative flex-shrink-0 w-[80vw] lg:max-w-[45vw] rounded-xl overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-cocoon-1">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/Cocoon_1.webp"
+           alt="Cocoon 1"
+           class="object-contain max-h-[80vh]rounded-xl w-full opacity-0 transition-opacity duration-300"
+           onload="handleImageLoaded(this, 'spinner-cocoon-1')"
+           data-spinner="spinner-cocoon-1" />
+    </div>
+
+    <!-- Image 2 -->
+    <div class="relative flex-shrink-0 w-[80vw] lg:max-w-[45vw] rounded-xl overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-cocoon-2">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/Cocoon_2.webp"
+           alt="Cocoon 2"
+           class="object-contain max-h-[80vh]rounded-xl w-full opacity-0 transition-opacity duration-300"
+           onload="handleImageLoaded(this, 'spinner-cocoon-2')"
+           data-spinner="spinner-cocoon-2" />
+    </div>
+
+    <!-- Image 3 -->
+    <div class="relative flex-shrink-0 w-[80vw] lg:max-w-[45vw] rounded-xl overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-cocoon-3">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/Cocoon_3.webp"
+           alt="Cocoon 3"
+           class="object-contain max-h-[80vh]rounded-xl w-full opacity-0 transition-opacity duration-300"
+           onload="handleImageLoaded(this, 'spinner-cocoon-3')"
+           data-spinner="spinner-cocoon-3" />
+    </div>
+
+    <!-- Image 4 -->
+    <div class="relative flex-shrink-0 w-[80vw] lg:max-w-[45vw] rounded-xl overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-cocoon-4">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/Cocoon_4.webp"
+           alt="Cocoon 4"
+           class="object-contain max-h-[80vh]rounded-xl w-full opacity-0 transition-opacity duration-300"
+           onload="handleImageLoaded(this, 'spinner-cocoon-4')"
+           data-spinner="spinner-cocoon-4" />
+    </div>
+
+    <!-- Image 5 -->
+    <div class="relative flex-shrink-0 w-[80vw] lg:max-w-[45vw] rounded-xl overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-cocoon-5">
+        <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+          <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+        </div>
+      </div>
+      <img src="./Image/Cocoon_5.webp"
+           alt="Cocoon 5"
+           class="object-contain max-h-[80vh]rounded-xl w-full opacity-0 transition-opacity duration-300"
+           onload="handleImageLoaded(this, 'spinner-cocoon-5')"
+           data-spinner="spinner-cocoon-5" />
+    </div>
+
+  </div>
+</div>
+
+
+<!-- CARD mở gallery scroll -->
+<div class="card relative group" onclick="openGalleryModal('modal-menu')">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-menu">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Ảnh hiển thị sau khi load -->
+  <div class="w-full aspect-[16/9] overflow-hidden rounded-xl">
+    <img src="./Image/Menu.webp"
+        alt="Project 7"
+        class="w-full h-full object-cover object-center opacity-0 transition-opacity duration-300"
+        onload="handleImageLoaded(this, 'spinner-menu')" 
+        data-spinner="spinner-menu"/>
+  </div>
+</div>
+
+
+<!-- MODAL MENU -->
+<div id="modal-menu"
+    class="gallery-modal fixed inset-0 z-50 bg-black bg-opacity-95 hidden overflow-hidden"
+    onclick="handleModalBackdropClick(event, 'modal-menu')">
+
+  <!-- Nút Close -->
+  <button onclick="closeGalleryModal('modal-menu')"
+          class="absolute top-6 left-6 text-white text-3xl font-bold hover:text-gray-500 z-50">
+    &times;
+  </button>
+
+  <!-- DESKTOP: Scroll ngang -->
+  <div class="scroll-x hidden lg:flex justify-center px-6 py-6 overflow-x-auto items-center h-full"
+      style="scroll-snap-type: x mandatory; scrollbar-width: none;">
+    <style>
+      .scroll-x::-webkit-scrollbar { display: none; }
+    </style>
+    <div class="flex gap-6 scroll-snap-x">
+    <img src="./Image/Menu2.webp" alt="Detail 1"
+        class="h-[80vh] object-contain rounded-2xl shadow-xl scroll-snap-align-start opacity-0 transition-opacity duration-300"
+        onload="this.style.opacity = 1" />
+
+    <img src="./Image/Menu1.webp" alt="Detail 2"
+        class="h-[80vh] object-contain rounded-2xl shadow-xl scroll-snap-align-start opacity-0 transition-opacity duration-300"
+        onload="this.style.opacity = 1" />
+    </div>
+  </div>
+
+  <!-- TABLET & MOBILE: Lightbox ảnh không scroll -->
+  <div class="lg:hidden flex flex-col items-center gap-5 px-4 py-10 pt-10 overflow-y-auto"
+      style="scrollbar-width: none;">
+    <style>
+      .lg\:hidden::-webkit-scrollbar { display: none; }
+    </style>
+    <img src="./Image/Menu2.webp" alt="Detail 1"
+        class="w-full max-w-xl object-contain rounded-[13px] shadow-lg opacity-0 transition-opacity duration-300"
+        onload="this.style.opacity = 1" />
+
+    <img src="./Image/Menu1.webp" alt="Detail 2"
+        class="w-full max-w-xl object-contain rounded-[13px] shadow-lg opacity-0 transition-opacity duration-300"
+        onload="this.style.opacity = 1" />
+  </div>
+</div>
+
+    <!-- CARD IMAGE 8 -->
+<div class="card relative group">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-illustration">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image 8 -->
+  <img src="./Image/illustration.webp"
+       alt="Project 8"
+       class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+       onload="handleImageLoaded(this, 'spinner-illustration')"
+       onclick="openLightbox('./Image/illustration.webp')" 
+       data-spinner="spinner-illustration"/>
+</div>
+
+    <!-- CARD IMAGE 9 -->
+<div class="card relative group">
+  <!-- Spinner Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-10" id="spinner-line-illustration">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center bg-black">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image 9 -->
+  <img src="./Image/line illustration.webp"
+       alt="Project 9"
+       class="w-full h-auto rounded-xl opacity-0 transition-opacity duration-300"
+       onload="handleImageLoaded(this, 'spinner-line-illustration')"
+       onclick="openLightbox('./Image/line illustration.webp')" 
+       data-spinner="spinner-line-illustration"/>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox"
+    class="lightbox hidden z-50">
+
+  <!-- CLOSE BUTTON (top-left, không có vòng tròn) -->
+  <button onclick="closeLightbox()"
+    class="absolute top-4 left-8 text-white text-3xl font-bold hover:text-gray-500 z-50 transition">
+    &times;
+  </button>
+
+<!-- IMAGE PREVIEW -->
+<div class="flex-1 flex items-center justify-center p-2 sm:p-6 relative">
+  <!-- Spinner -->
+  <div class="absolute inset-0 flex items-center justify-center bg-black z-20" id="lightbox-spinner">
+    <div class="w-14 h-14 rounded-full border-t-4 border-white border-opacity-30 animate-spin flex items-center justify-center">
+      <img src="./Image/favicon2.webp" class="w-6 h-6 object-contain" />
+    </div>
+  </div>
+
+  <!-- Image -->
+  <img id="lightbox-img"
+      src=""
+      alt="Preview"
+      class="max-w-full max-h-[90vh] rounded-xl shadow-lg object-contain opacity-0 transition-opacity duration-300"
+      onload="handleLightboxImageLoaded()" />
+</div>
+
+</div>
+
+
+<!-- JS -->
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const openSidebarBtn = document.getElementById('openSidebar');
+  const closeSidebarBtn = document.getElementById('closeSidebar');
+  const backdrop = document.getElementById('backdrop');
+
+// Mobile sidebar open
+openSidebarBtn.addEventListener('click', () => {
+  sidebar.classList.remove('hidden');
+  requestAnimationFrame(() => {
+    sidebar.classList.remove('-translate-x-full');
+  });
+  backdrop.classList.remove('hidden');
+  openSidebarBtn.classList.add('hidden');
+});
+
+  // Mobile sidebar close
+function closeMobileSidebar() {
+  sidebar.classList.add('-translate-x-full');
+  backdrop.classList.add('hidden');
+  openSidebarBtn.classList.remove('hidden'); // Hiện lại icon hamburger
+  setTimeout(() => sidebar.classList.add('hidden'), 300);
+}
+// Nếu resize lại từ mobile lên desktop thì hiện lại sidebar
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 768) {
+    sidebar.classList.remove('hidden', '-translate-x-full');
+  } else {
+    sidebar.classList.add('hidden', '-translate-x-full');
+  }
+});
+
+  closeSidebarBtn.addEventListener('click', closeMobileSidebar);
+
+// Lightbox
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const spinner = document.getElementById('lightbox-spinner');
+
+  // Reset trạng thái trước khi load
+  lbImg.classList.remove('opacity-100');
+  lbImg.classList.add('opacity-0');
+  spinner.style.display = 'flex'; // hiện spinner lại
+
+  // Gắn lại onload trước khi set src
+  lbImg.onload = function () {
+    lbImg.classList.remove('opacity-0');
+    lbImg.classList.add('opacity-100');
+    spinner.style.display = 'none';
+  };
+
+  lbImg.src = src;
+
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Ẩn hamburger
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.add('hidden');
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  lb.classList.remove('active');
+  document.getElementById('lightbox-img').src = '';
+  document.body.style.overflow = '';
+
+  // Hiện lại hamburger menu khi lightbox đóng
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.remove('hidden');
+}
+
+function openGalleryModal(id) {
+  const modal = document.getElementById(id);
+  const scrollable = modal.querySelector('.content-scroll');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Cuộn về đầu modal
+  if (scrollable?.scrollTo) {
+    scrollable.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  // ✅ Ẩn hamburger khi mở modal
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.add('hidden');
+}
+
+function closeGalleryModal(id) {
+  const modal = document.getElementById(id);
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+
+  // Hiện lại hamburger icon khi gallery đóng
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.remove('hidden');
+}
+
+   // Thoát Lightbox và Gallery Modal khi bấm ESC
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+      document.querySelectorAll('.gallery-modal.active').forEach(modal => {
+        modal.classList.remove('active');
+      });
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Đóng sidebar nếu người dùng scroll khi đang mở (chỉ trên mobile)
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarVisible = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+
+  if (isMobile && isSidebarVisible) {
+    const currentScroll = window.scrollY;
+
+    // Nếu người dùng scroll xuống dưới ít nhất 20px
+    if (Math.abs(currentScroll - lastScroll) > 20) {
+      closeMobileSidebar();
+    }
+
+    lastScroll = currentScroll;
+  }
+});
+
+window.addEventListener('scroll', () => {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarVisible = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+
+  if (isMobile && isSidebarVisible) {
+    closeMobileSidebar();
+  }
+});
+
+// Đóng sidebar nếu chạm/nhấp ra ngoài sidebar trên mobile
+document.addEventListener('click', function (e) {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarOpen = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+  
+  if (isMobile && isSidebarOpen && !sidebar.contains(e.target) && !openSidebarBtn.contains(e.target)) {
+    closeMobileSidebar();
+  }
+});
+
+document.addEventListener('touchstart', function (e) {
+  const isMobile = window.innerWidth < 768;
+  const isSidebarOpen = !sidebar.classList.contains('hidden') && !sidebar.classList.contains('-translate-x-full');
+  
+  if (isMobile && isSidebarOpen && !sidebar.contains(e.target) && !openSidebarBtn.contains(e.target)) {
+    closeMobileSidebar();
+  }
+});
+
+// Enable drag-scroll for horizontal gallery
+document.querySelectorAll('.scroll-x').forEach(container => {
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  // Bắt sự kiện đúng lớp scroll-x chứ không phải con
+  container.addEventListener('mousedown', (e) => {
+    e.preventDefault(); // ← Ngăn ảnh hoặc DOM con gây cản trở
+    isDown = true;
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+    container.classList.add('cursor-grabbing');
+  }, { passive: false });
+
+  container.addEventListener('mouseleave', () => {
+    isDown = false;
+    container.classList.remove('cursor-grabbing');
+  });
+
+  container.addEventListener('mouseup', () => {
+    isDown = false;
+    container.classList.remove('cursor-grabbing');
+  });
+
+  container.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5; // Điều chỉnh tốc độ
+    container.scrollLeft = scrollLeft - walk;
+  }, { passive: false });
+
+  // Đặt sẵn cursor để UX tốt
+  container.classList.add('cursor-grab');
+});
+
+// Open modal gallery
+function openGalleryModal(id) {
+  const modal = document.getElementById(id);
+  const scrollable = modal.querySelector('.content-scroll, .scroll-x');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Reset scroll về đầu
+  if (scrollable?.scrollTo) {
+    scrollable.scrollTo({ left: 0, top: 0 });
+  }
+
+  // Ẩn hamburger icon khi gallery mở
+  const hamburger = document.getElementById('hamburgerBar');
+  if (hamburger) hamburger.classList.add('hidden');
+}
+
+
+
+function handleImageLoaded(img, spinnerId) {
+  img.classList.remove('opacity-0');
+  img.classList.add('opacity-100');
+
+  const spinner = document.getElementById(spinnerId);
+  if (spinner) {
+    spinner.style.display = 'none';
+  }
+}
+
+<!-- Cuộn về đầu trang khi reload -->
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+window.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("img[data-spinner]").forEach((img) => {
+    if (img.complete) {
+      const spinnerId = img.getAttribute("data-spinner");
+      handleImageLoaded(img, spinnerId);
+    }
+  });
+});
+
+  // Loading spinner trong modal/lightbox
+function handleLightboxImageLoaded() {
+  const img = document.getElementById('lightbox-img');
+  const spinner = document.getElementById('lightbox-spinner');
+  img.classList.remove('opacity-0');
+  img.classList.add('opacity-100');
+  if (spinner) spinner.style.display = 'none';
+}
+
+  // Chặn scroll ngoài modal khi modal đang active
+function preventScrollOutsideModal(e) {
+  const isLightboxOpen = document.getElementById('lightbox')?.classList.contains('active');
+  const isAnyModalOpen = document.querySelector('.gallery-modal.active');
+
+  // Nếu không mở lightbox hoặc modal → không làm gì
+  if (!isLightboxOpen && !isAnyModalOpen) return;
+
+  const scrollableInsideModal = e.target.closest('.content-scroll, .scroll-x');
+
+  // Nếu không phải vùng scroll bên trong modal → ngăn scroll
+  if (!scrollableInsideModal) {
+    e.preventDefault();
+  }
+}
+
+document.addEventListener('touchmove', preventScrollOutsideModal, { passive: false });
+
+</script>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const iframe = document.getElementById("personal-vimeo-player");
+    const overlay = document.getElementById("personal-vimeo-overlay");
+    const player = new Vimeo.Player(iframe);
+
+    player.on('play', () => {
+      overlay.classList.add("hidden");
+    });
+
+    player.on('ended', () => {
+      console.log("Video ended!");
+      overlay.classList.remove("hidden");
+    });
+
+    window.replayVimeo = function () {
+      player.setCurrentTime(0).then(() => {
+        player.play();
+        overlay.classList.add("hidden");
+      });
+    };
+  });
+</script>
+
+</body>
+</html>
