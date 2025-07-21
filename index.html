@@ -105,7 +105,7 @@ body {
     
     <!-- IMAGE WRAPPER -->
     <div class="w-full px-4">
-      <div class="w-full max-w-[1400px] mx-auto">
+      <div class="w-full max-w-[1270px] mx-auto">
         <img src="./Image/portfolio-group.webp" 
              alt="Portfolio Group" 
              class="w-full h-auto object-contain" />
@@ -140,6 +140,18 @@ body {
           <img src="./Image/icon-obs.webp" alt="OBS" class="h-12 md:h-16 hover-glow" />
           <img src="./Image/icon-vmix.webp" alt="vMix" class="h-12 md:h-16 hover-glow" />
         </div>
+
+        <!-- Clone để scroll loop -->
+        <div class="flex gap-10 shrink-0 icon-set">
+          <img src="./Image/icon-ps.webp" alt="Photoshop" class="h-12 md:h-16 hover-glow" />
+          <img src="./Image/icon-ai.webp" alt="Illustrator" class="h-12 md:h-16 hover-glow" />
+          <img src="./Image/icon-ae.webp" alt="After Effects" class="h-12 md:h-16 hover-glow" />
+          <img src="./Image/icon-lr.webp" alt="Lightroom" class="h-12 md:h-16 hover-glow" />
+          <img src="./Image/icon-pr.webp" alt="Premiere Pro" class="h-12 md:h-16 hover-glow" />
+          <img src="./Image/icon-capcut.webp" alt="Capcut" class="h-12 md:h-16 hover-glow" />
+          <img src="./Image/icon-obs.webp" alt="OBS" class="h-12 md:h-16 hover-glow" />
+          <img src="./Image/icon-vmix.webp" alt="vMix" class="h-12 md:h-16 hover-glow" />
+        </div>
       </div>
     </div>
   </div>
@@ -151,28 +163,177 @@ body {
 
       <!-- AVATAR -->
       <img src="./Image/Ava 2.webp" 
-           alt="Ava" 
-           class="w-full h-auto object-contain pt-4"
-           data-aos="fade-up"
-           data-aos-duration="800" />
+            alt="Ava" 
+            class="w-full h-auto object-contain pt-4"
+            data-aos-offset="200"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            data-aos-once="true"/>
 
       <!-- TITLE -->
       <h3 data-aos="fade-up"
-          data-aos-delay="100"
-          data-aos-duration="800"
+          data-aos-offset="200"
+          data-aos-delay="200"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-once="true"
           class="text-2xl sm:text-3xl md:text-4xl font-bold">
         Hi, I'm Jacky
       </h3>
 
       <!-- PARAGRAPH -->
-      <div class="text-justify pb-20" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+      <div class="text-justify pb-10" 
+          data-aos-offset="200"
+          data-aos="fade-up"
+          data-aos-delay="300"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-once="true">
         <p class="text-sm sm:text-base md:text-lg leading-relaxed">
           My background is in Chinese language studies, but I have a strong passion for media, design, and video editing, which has led me to self-learn and develop skills in these areas. I am proactive, hardworking, and always eager to learn through hands-on experience. Although my background differs from many in the creative field, I believe that with a spirit of life-long learning, continuous curiosity, and a growth mindset, I can still add value along the way.
         </p>
       </div>
     </div>
 
-  </section>
+<!-- TIMELINE 3 COLUMNS -->
+<div class="w-full max-w-[1000px] px-4 sm:px-6 pb-20 mx-auto">
+  <div class="grid gap-12 lg:grid-cols-3 text-white text-left">
+
+    <!-- Column Item -->
+    <div  data-aos="fade-up"
+          data-aos-offset="200"
+          data-aos-delay="400"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-once="true">
+      <h3 class="text-xl font-bold mb-6 text-left">Education</h3>
+      <div class="relative">
+        <!-- Line -->
+        <div class="absolute top-0 left-[10px] bottom-0 w-[2px] bg-gray-600 z-0"></div>
+
+        <!-- Items -->
+        <div class="flex flex-col gap-12 pl-8 relative z-10">
+          <!-- Item -->
+          <div class="relative">
+            <div class="absolute -left-[34px] top-0 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">2019–2023</h4>
+              <p class="text-sm">Hong Bang International University</p>
+              <p class="text-xs text-gray-300">Chinese Studies – GPA 3.82/4.00</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -left-[34px] top-1 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">12.2019</h4>
+              <p class="text-sm">ColorME SaiGon</p>
+              <p class="text-xs text-gray-300">Adobe Photoshop</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -left-[34px] top-1 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base flex items-center gap-1">2009–2021
+                  <span class="text-xs text-white">(break 2016–2019)</span>
+              </h4>
+              <p class="text-sm">Tran Boi Co Chinese School</p>
+              <p class="text-xs text-gray-300">Chinese Language</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div  data-aos="fade-up"
+          data-aos-offset="200"
+          data-aos-delay="700"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-once="true">
+      <h3 class="text-xl font-bold mb-6 text-left">Work Experience</h3>
+      <div class="relative">
+        <div class="absolute top-0 left-[10px] bottom-0 w-[2px] bg-gray-600 z-0"></div>
+
+        <div class="flex flex-col gap-12 pl-8 relative z-10">
+          <div class="relative">
+            <div class="absolute -left-[34px] top-0 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">05.2023 - 08.2025</h4>
+              <p class="text-sm">Modelty Strategy & Consulting</p>
+              <p class="text-xs text-gray-300">Team Leader I Indoor Mapping</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -left-[34px] top-1 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">10.2023 - 12.2025</h4>
+              <p class="text-sm">Nihao Chinese Education Center</p>
+              <p class="text-xs text-gray-300">Part-time Chinese Teacher</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -left-[34px] top-1 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">2021 - 2023</h4>
+              <p class="text-sm">Freelancer Graphic Designer</p>
+              <p class="text-sm">Event Assistant</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -left-[34px] top-1 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">06.2020 - 07.2020</h4>
+              <p class="text-sm">Kites Forum</p>
+              <p class="text-xs text-gray-300">Translator</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievements -->
+    <div  data-aos="fade-up"
+          data-aos-offset="200"
+          data-aos-delay="1000"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-once="true">
+      <h3 class="text-xl font-bold mb-6 text-left">Achievements</h3>
+      <div class="relative">
+        <div class="absolute top-0 left-[10px] bottom-0 w-[2px] bg-gray-600 z-0"></div>
+
+        <div class="flex flex-col gap-12 pl-8 relative z-10">
+          <div class="relative">
+            <div class="absolute -left-[34px] top-0 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">06.2022</h4>
+              <p class="text-sm">"Chinese Bridge" Chinese Proficiency Competition for Foreign Students</p>
+              <p class="text-xs text-gray-300">Encouragement Prize, HCMC Regional Round</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -left-[34px] top-1 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">09.2022</h4>
+              <p class="text-sm">Euréka Scientific Research Student Award </p>
+              <p class="text-xs text-gray-300">Semifinalist Top 30</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 </main>
 
 
@@ -265,13 +426,17 @@ if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 </script>
-
 <!-- AOS JS -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
   AOS.init();
 </script>
 
+<script>
+  AOS.init({
+    once: true  // animation sẽ lặp lại mỗi lần phần tử vào viewport
+  });
+</script>
 </body>
 </html>
 
