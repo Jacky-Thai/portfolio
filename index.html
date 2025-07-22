@@ -102,7 +102,7 @@ body {
 
 <!-- MAIN CONTENT -->
 <main class="flex-1 px-0 py-0 -translate-y-3">
-  <section class="relative w-full bg-[#111] pt-20 pb-20 md:pb-20 flex flex-col items-center border-t border-[#333]">
+  <section class="relative w-full bg-[#111] pt-20 pb-10 flex flex-col items-center border-t border-[#333]">
     
     <!-- IMAGE WRAPPER -->
     <div class="w-full px-4">
@@ -187,7 +187,7 @@ body {
     </div>
 
 <!-- TIMELINE 3 COLUMNS -->
-<div class="w-full max-w-[1000px] px-4 sm:px-6 pb-8 mx-auto">
+<div class="w-full max-w-[1000px] px-4 sm:px-6 mx-auto">
   <div class="grid gap-12 lg:grid-cols-3 text-white text-left">
 
     <!-- Column Item -->
@@ -334,22 +334,11 @@ body {
   </div>
 </div>
 
-<!-- CONTACT -->
-<div class="w-full max-w-[1000px] px-4 sm:px-6 pt-6 pb-2 mx-auto">
-  <div data-aos="fade-up"
-       data-aos-offset="200"
-       data-aos-delay="300"
-       data-aos-duration="800"
-       data-aos-easing="ease-in-out"
-       data-aos-once="true"
-       class="text-white text-center flex flex-col items-center gap-6">
-
-    <!-- Title -->
-    <h3 class="text-xl sm:text-2xl md:text-3xl font-bold">Contact Me</h3>
-
-    <!-- Icons -->
-    <div class="flex gap-8 items-center justify-center">
-      <!-- Facebook -->
+<!-- Footer không cần animation -->
+<footer class="mt-8 md:pl-8 pl-4 pt-8 pd-5">
+  <h2 class="text-2xl font-bold mb-4">Contact Me</h2>
+  <div class="flex space-x-4">
+<!-- Facebook -->
       <a href="https://www.facebook.com/X.Zaanj/" target="_blank" rel="noopener noreferrer">
         <img src="./Image/icon-facebook.webp" alt="Facebook" class="w-8 h-8 hover:scale-110 transition-transform" />
       </a>
@@ -363,15 +352,13 @@ body {
       <a href="https://zalo.me/84903077938" target="_blank" rel="noopener noreferrer">
         <img src="./Image/icon-zalo.webp" alt="Zalo" class="w-8 h-8 hover:scale-110 transition-transform" />
       </a>
-    </div>
+    <!-- thêm mạng xã hội nếu cần -->
   </div>
-</div>
+</footer>
 
-  <!-- Spacer for mobile to trigger AOS -->
-  <div class="block md:hidden h-2"></div>
-</div>
 </section>
 </main>
+
 
 
 <!-- JS -->
