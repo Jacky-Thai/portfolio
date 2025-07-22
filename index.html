@@ -70,6 +70,7 @@ body {
   transform: scale(1.15);
   filter: drop-shadow(0 0 6px #ffffffcc); /* Glow trắng */
 }
+
   </style>
 </head>
 <body class="flex flex-col md:flex-row">
@@ -101,7 +102,7 @@ body {
 
 <!-- MAIN CONTENT -->
 <main class="flex-1 px-0 py-0 -translate-y-3">
-  <section class="relative w-full bg-[#111] pt-20 flex flex-col items-center border-t border-[#333]">
+  <section class="relative w-full bg-[#111] pt-20 pb-0 md:pb-20 flex flex-col items-center border-t border-[#333]">
     
     <!-- IMAGE WRAPPER -->
     <div class="w-full px-4">
@@ -172,7 +173,7 @@ body {
       </h3>
 
       <!-- PARAGRAPH -->
-      <div class="text-justify pb-10" 
+      <div class="text-justify pb-8" 
           data-aos-offset="200"
           data-aos="fade-up"
           data-aos-delay="300"
@@ -186,7 +187,7 @@ body {
     </div>
 
 <!-- TIMELINE 3 COLUMNS -->
-<div class="w-full max-w-[1000px] px-4 sm:px-6 pb-20 mx-auto">
+<div class="w-full max-w-[1000px] px-4 sm:px-6 pb-12 mx-auto">
   <div class="grid gap-12 lg:grid-cols-3 text-white text-left">
 
     <!-- Column Item -->
@@ -225,9 +226,10 @@ body {
           <div class="relative">
             <div class="absolute -left-[34px] top-1 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
             <div>
-              <h4 class="font-semibold text-base flex items-center gap-1">2009–2021
-                  <span class="text-xs text-white">(break 2016–2019)</span>
-              </h4>
+                <h4 class="font-semibold text-base">
+                  2009–2021
+                  <div class="text-xs text-white mb-2">(break 2016–2019)</div>
+                </h4>
               <p class="text-sm">Tran Boi Co Chinese School</p>
               <p class="text-xs text-gray-300">Chinese Language</p>
             </div>
@@ -248,10 +250,20 @@ body {
         <div class="absolute top-0 left-[10px] bottom-0 w-[2px] bg-gray-600 z-0"></div>
 
         <div class="flex flex-col gap-12 pl-8 relative z-10">
+
           <div class="relative">
             <div class="absolute -left-[34px] top-0 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
             <div>
-              <h4 class="font-semibold text-base">05.2023 - 08.2025</h4>
+              <h4 class="font-semibold text-base">04.2025 - 07.2025</h4>
+              <p class="text-sm">Modelty Strategy & Consulting</p>
+              <p class="text-xs text-gray-300">Tester - Software Testing</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -left-[34px] top-0 w-4 h-4 bg-white border-2 border-[#111] rounded-full"></div>
+            <div>
+              <h4 class="font-semibold text-base">05.2023 - 03.2025</h4>
               <p class="text-sm">Modelty Strategy & Consulting</p>
               <p class="text-xs text-gray-300">Team Leader I Indoor Mapping</p>
             </div>
@@ -321,6 +333,40 @@ body {
     </div>
   </div>
 </div>
+
+<!-- CONTACT -->
+<div class="w-full max-w-[1000px] px-4 sm:px-6 pt-3 pb-2 mx-auto">
+  <div data-aos="fade-up"
+       data-aos-offset="200"
+       data-aos-delay="1000"
+       data-aos-duration="1000"
+       data-aos-easing="ease-in-out"
+       data-aos-once="true"
+       class="text-white text-center flex flex-col items-center gap-6">
+
+    <!-- Title -->
+    <h3 class="text-xl sm:text-2xl md:text-3xl font-bold">Contact Me</h3>
+
+    <!-- Icons -->
+    <div class="flex gap-8 items-center justify-center">
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/X.Zaanj/" target="_blank" rel="noopener noreferrer">
+        <img src="./Image/icon-facebook.webp" alt="Facebook" class="w-8 h-8 hover:scale-110 transition-transform" />
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/x.zaanj__/" target="_blank" rel="noopener noreferrer">
+        <img src="./Image/icon-instagram.webp" alt="Instagram" class="w-8 h-8 hover:scale-110 transition-transform" />
+      </a>
+
+      <!-- Zalo -->
+      <a href="https://zalo.me/84903077938" target="_blank" rel="noopener noreferrer">
+        <img src="./Image/icon-zalo.webp" alt="Zalo" class="w-8 h-8 hover:scale-110 transition-transform" />
+      </a>
+    </div>
+  </div>
+</div>
+
 </section>
 </main>
 
