@@ -129,9 +129,9 @@ data-aos-duration="800"
 data-aos-easing="ease-in-out"
 data-aos-once="true"
 class="w-full overflow-hidden pt-6 pb-4 px-4">
-  <div class="max-w-[1400px] mx-auto overflow-visible">
+  <div class="max-w-[1400px] relative h-20 mx-auto overflow-visible">
     <div class="relative w-full">
-      <div id="scrollIcons" class="flex gap-10 animate-scroll-loop">
+      <div id="scrollIcons" class="absolute top-0 left-0 flex gap-10 animate-scroll-loop">
         <!-- Icon Set -->
         <div class="flex gap-10 shrink-0 icon-set">
           <img src="./Image/icon-ps.webp" alt="Photoshop" class="h-12 md:h-16 hover-glow" />
@@ -322,7 +322,7 @@ class="flex-1 relative">
 <div 
 data-aos="fade-up"
 data-aos-offset="300"
-data-aos-delay="600"
+data-aos-delay="400"
 data-aos-duration="800"
 data-aos-easing="ease-in-out"
 data-aos-once="true"
@@ -495,6 +495,14 @@ if ('scrollRestoration' in history) {
   AOS.init({
     once: true  // animation sẽ lặp lại mỗi lần phần tử vào viewport
   });
+
+  window.addEventListener("DOMContentLoaded", () => {
+  const scrollWrapper = document.getElementById("scrollIcons");
+  const iconSet = scrollWrapper.querySelector(".icon-set");
+  const clone = iconSet.cloneNode(true);
+  scrollWrapper.appendChild(clone);
+});
+
 </script>
 </body>
 </html>
